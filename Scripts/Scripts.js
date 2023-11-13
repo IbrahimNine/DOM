@@ -14,7 +14,7 @@ function toggleItemInBag(item) {
       break;
     }
   }
- // condition to check if the item exist then it loop through the dropdown till find it and remove it, else it add the item to the list
+  // condition to check if the item exist then it loop through the dropdown till find it and remove it, else it add the item to the list
   if (itemExists) {
     Array.from(existingItems).forEach((existingItem) => {
       if (existingItem.innerHTML.includes(item.title)) {
@@ -35,7 +35,7 @@ function toggleItemInBag(item) {
     `;
     bagDropdown.appendChild(newItem);
   }
- // little toggle method with a condition to turn yellow the icon if there are any items in it
+  // little toggle method with a condition to turn yellow the icon if there are any items in it
   let bagHeartIcon = document.querySelector(".bi-bag-heart");
   bagHeartIcon.classList.toggle("text-warning", existingItems.length > 0);
 }
@@ -129,7 +129,6 @@ for (const cardContainer of cardContainers) {
       let iconItems = document.querySelectorAll(".cart-dropdown li");
 
       // another toggle method to highlight the icon in condition if any item exists
-      iconItems.forEach((item) => console.log(item.innerHTML));
       selectedBagIcon.classList.toggle("text-warning", iconItems.length > 0);
     });
   }
@@ -160,10 +159,15 @@ for (const [j, minusBtn] of minusBtns.entries()) {
 /* --------------------------back to the top-----------------------*/
 let mybutton = document.getElementById("myBtn");
 
-window.onscroll = function() {scrollFunction()};
+window.onscroll = function () {
+  scrollFunction();
+};
 
 function scrollFunction() {
-  if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+  if (
+    document.body.scrollTop > 500 ||
+    document.documentElement.scrollTop > 500
+  ) {
     mybutton.style.display = "block";
   } else {
     mybutton.style.display = "none";
