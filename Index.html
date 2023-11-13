@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./Styles/styles.css" />
+    <link
+      rel="shortcut icon"
+      href="https://cdn-icons-png.flaticon.com/512/99/99410.png"
+      type="image/x-icon"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+    <title>A Shopping Cart</title>
+  </head>
+  <body>
+    <nav
+      class="navbar navbar-dark bg-dark navbar-expand-lg d-flex justify-content-sm-between align-items-center px-3"
+    >
+      <h1 class="navbar-brand">Your Shopping Cart</h1>
+
+      <div class="row">
+        <div class="col">
+          <div title="Your favourites" class="btn-group">
+            <button
+              class="btn btn-dark dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <i class="bi bi-bag-heart"></i>
+            </button>
+            <ul id="bookmarkDropdown" class="dropdown-menu dropdown-menu-end">
+              <!-- contents to be filled here using js script -->
+            </ul>
+          </div>
+        </div>
+        <div class="col">
+          <div title="Your purchase list" class="btn-group">
+            <button
+              class="btn btn-dark dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <i class="bi bi-cart-check"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end cart-dropdown">
+              <!-- contents to be filled here using js script -->
+            </ul>
+          </div>
+        </div>
+        <div class="col d-flex align-items-center">
+          <h5
+            title="Your total cost"
+            class="text-light text-nowrap m-0 totalCost"
+          >
+            <span class="cost">0.00</span> TND
+          </h5>
+        </div>
+      </div>
+    </nav>
+
+    <div onclick="topFunction()" id="myBtn" class="backToTheTop"><a>Back to Top</a></div>
+    <main
+      class="container d-flex flex-wrap justify-content-around bg-secondary-subtle"
+    >
+      <div class="card m-3 position-relative" style="width: 18rem">
+        <div>
+          <img
+            src="https://www.doubletwo.co.uk/media/catalog/product/cache/c6c1bd86f43b8caa5eecdaaa381e98d2/l/b/lbt8259b_black_front.jpg"
+            class="card-img-top"
+            alt="Classic Black Cotton T-shirt"
+          />
+          <i
+            class="bi bi-bookmark-heart display-6 position-absolute top-3 end-0"
+          ></i>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Classic Black Cotton T-Shirt</h5>
+          <p class="card-text">
+            Sizes Available: S, M, L, XL.
+            <br />
+            Material: 100% Cotton.
+          </p>
+          <p class="card-text">
+            <strong>Price: <span class="price">75</span> TND</strong>
+          </p>
+          <div
+            class="d-flex flex-column justify-content-center align-items-center"
+          >
+            <i class="bi bi-plus-circle display-6"></i>
+            <i class="bi bi-x-circle display-6 d-none"></i>
+            <div class="d-flex justify-content-around w-100">
+              <a class="btn btn-primary plusplus"> + </a>
+              <div><h4>0</h4></div>
+              <a class="btn btn-primary minusminus"> - </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card m-3 position-relative" style="width: 18rem">
+        <img
+          src="https://www.corporateapparelonline.com.au/cdn/shop/products/mens-the-republic-long-sleeve-shirt-black-600x600.jpg"
+          class="card-img-top"
+          alt="Black Slim Fit Full Sleeves Shirt"
+        />
+        <i
+          class="bi bi-bookmark-heart display-6 position-absolute top-3 end-0"
+        ></i>
+        <div class="card-body">
+          <h5 class="card-title">Black Slim Fit Full Sleeves Shirt</h5>
+          <p class="card-text">
+            Sizes Available: S, M, L, XL.
+            <br />
+            Material: High-quality cotton for comfort.
+          </p>
+          <p class="card-text">
+            <strong>Price: <span class="price">90</span> TND</strong>
+          </p>
+          <div
+            class="d-flex flex-column justify-content-center align-items-center"
+          >
+            <i class="bi bi-plus-circle display-6"></i>
+            <i class="bi bi-x-circle display-6 d-none"></i>
+            <div class="d-flex justify-content-around w-100">
+              <a class="btn btn-primary plusplus"> + </a>
+              <div><h4>0</h4></div>
+              <a class="btn btn-primary minusminus"> - </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card m-3 position-relative" style="width: 18rem">
+        <img
+          src="https://i5.walmartimages.com/asr/6a08c8be-2c34-41d1-94c0-31713ed4bf13.b245a630bcde9f2a2d799a67e9019fba.jpeg"
+          class="card-img-top"
+          alt="Regular Tactical Combat Cargo Pants"
+        />
+        <i
+          class="bi bi-bookmark-heart display-6 position-absolute top-3 end-0"
+        ></i>
+        <div class="card-body">
+          <h5 class="card-title">Regular Tactical Combat Cargo Pants</h5>
+          <p class="card-text">
+            Sizes Available: S, M, L, XL.
+            <br />
+            Material: Durable Tactical Fabric.
+          </p>
+          <p class="card-text">
+            <strong>Price: <span class="price">90</span> TND</strong>
+          </p>
+          <div
+            class="d-flex flex-column justify-content-center align-items-center"
+          >
+            <i class="bi bi-plus-circle display-6"></i>
+            <i class="bi bi-x-circle display-6 d-none"></i>
+            <div class="d-flex justify-content-around w-100">
+              <a class="btn btn-primary plusplus"> + </a>
+              <div><h4>0</h4></div>
+              <a class="btn btn-primary minusminus"> - </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card m-3 position-relative" style="width: 18rem">
+        <img
+          src="https://www.dhresource.com/0x0/f2/albu/g21/M00/93/79/rBVaqmIryTWAHu2EAAF4bGwgAdo913.jpg"
+          class="card-img-top"
+          alt="Grey Combat Cargo Pants"
+        />
+        <i
+          class="bi bi-bookmark-heart display-6 position-absolute top-3 end-0"
+        ></i>
+        <div class="card-body">
+          <h5 class="card-title">Grey Combat Cargo Pants</h5>
+          <p class="card-text">
+            Sizes Available: S, M, L, XL.
+            <br />
+            Material: Breathable Cotton Blend.
+          </p>
+          <p class="card-text">
+            <strong>Price: <span class="price">75</span> TND</strong>
+          </p>
+          <div
+            class="d-flex flex-column justify-content-center align-items-center"
+          >
+            <i class="bi bi-plus-circle display-6"></i>
+            <i class="bi bi-x-circle display-6 d-none"></i>
+            <div class="d-flex justify-content-around w-100">
+              <a class="btn btn-primary plusplus"> + </a>
+              <div><h4>0</h4></div>
+              <a class="btn btn-primary minusminus"> - </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card m-3 position-relative" style="width: 18rem">
+        <img
+          src="https://www.fanaticshop.eu/picture/6517edbc425db/w960/da-spd01_camo.jpg"
+          class="card-img-top"
+          alt="Dark Combat Cargo Pants"
+        />
+        <i
+          class="bi bi-bookmark-heart display-6 position-absolute top-3 end-0"
+        ></i>
+        <div class="card-body">
+          <h5 class="card-title">Dark Combat Cargo Pants</h5>
+          <p class="card-text">
+            Sizes Available: S, M, L, XL.
+            <br />
+            Material: Ripstop Fabric for durability.
+          </p>
+          <p class="card-text">
+            <strong>Price: <span class="price">120</span> TND</strong>
+          </p>
+          <div
+            class="d-flex flex-column justify-content-center align-items-center"
+          >
+            <i class="bi bi-plus-circle display-6"></i>
+            <i class="bi bi-x-circle display-6 d-none"></i>
+            <div class="d-flex justify-content-around w-100">
+              <a class="btn btn-primary plusplus"> + </a>
+              <div><h4>0</h4></div>
+              <a class="btn btn-primary minusminus"> - </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card m-3 position-relative" style="width: 18rem">
+        <img
+          src="https://t4.ftcdn.net/jpg/00/35/62/81/360_F_35628182_NBHS9UkoOhgHJWtgxmmO6AS6v2f5liSz.jpg"
+          class="card-img-top"
+          alt="Black Leather Combat Boots"
+        />
+        <i
+          class="bi bi-bookmark-heart display-6 position-absolute top-3 end-0"
+        ></i>
+        <div class="card-body">
+          <h5 class="card-title">Black Leather Combat Boots</h5>
+          <p class="card-text">
+            Sizes Available: 40, 41, 42, 43.
+            <br />
+            Material: Genuine leather for comfort and style.
+          </p>
+          <p class="card-text">
+            <strong>Price: <span class="price">200</span> TND</strong>
+          </p>
+          <div
+            class="d-flex flex-column justify-content-center align-items-center"
+          >
+            <i class="bi bi-plus-circle display-6"></i>
+            <i class="bi bi-x-circle display-6 d-none"></i>
+            <div class="d-flex justify-content-around w-100">
+              <a class="btn btn-primary plusplus"> + </a>
+              <div><h4>0</h4></div>
+              <a class="btn btn-primary minusminus"> - </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card m-3 position-relative" style="width: 18rem">
+        <img
+          src="https://st.depositphotos.com/2315999/3139/i/450/depositphotos_31396367-stock-photo-black-army-shoes.jpg"
+          class="card-img-top"
+          alt="Black Combat Boots for Men"
+        />
+        <i
+          class="bi bi-bookmark-heart display-6 position-absolute top-3 end-0"
+        ></i>
+        <div class="card-body">
+          <h5 class="card-title">Black Combat Boots for Men</h5>
+          <p class="card-text">
+            Sizes Available: 41, 42, 43, 44.
+            <br />
+            Material: Durable synthetic leather with a rugged sole.
+          </p>
+          <p class="card-text">
+            <strong>Price: <span class="price">170</span> TND</strong>
+          </p>
+          <div
+            class="d-flex flex-column justify-content-center align-items-center"
+          >
+            <i class="bi bi-plus-circle display-6"></i>
+            <i class="bi bi-x-circle display-6 d-none"></i>
+            <div class="d-flex justify-content-around w-100">
+              <a class="btn btn-primary plusplus"> + </a>
+              <div><h4>0</h4></div>
+              <a class="btn btn-primary minusminus"> - </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card m-3 position-relative" style="width: 18rem">
+        <img
+          src="https://img.fruugo.com/product/6/53/310027536_max.jpg"
+          class="card-img-top"
+          alt="Leather Jacket Coat"
+        />
+        <i
+          class="bi bi-bookmark-heart display-6 position-absolute top-3 end-0"
+        ></i>
+        <div class="card-body">
+          <h5 class="card-title">Leather Jacket Coat</h5>
+          <p class="card-text">
+            Sizes Available: XS, S, M, L.
+            <br />
+            Material: Genuine leather with a stylish design.
+          </p>
+          <p class="card-text">
+            <strong>Price: <span class="price">325</span> TND</strong>
+          </p>
+          <div
+            class="d-flex flex-column justify-content-center align-items-center"
+          >
+            <i class="bi bi-plus-circle display-6"></i>
+            <i class="bi bi-x-circle display-6 d-none"></i>
+            <div class="d-flex justify-content-around w-100">
+              <a class="btn btn-primary plusplus"> + </a>
+              <div><h4>0</h4></div>
+              <a class="btn btn-primary minusminus"> - </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card m-3 position-relative" style="width: 18rem">
+        <img
+          src="https://www.kemimoto.com/cdn/shop/files/F1109-02901MBK.jpg"
+          class="card-img-top"
+          alt="Vintage Leather Gloves"
+        />
+        <i
+          class="bi bi-bookmark-heart display-6 position-absolute top-3 end-0"
+        ></i>
+        <div class="card-body">
+          <h5 class="card-title">Vintage Leather Gloves</h5>
+          <p class="card-text">
+            Sizes Available: M, L, XL.
+            <br />
+            Material: Genuine vintage leather for a classic look.
+          </p>
+          <p class="card-text">
+            <strong>Price: <span class="price">165</span> TND</strong>
+          </p>
+          <div
+            class="d-flex flex-column justify-content-center align-items-center"
+          >
+            <i class="bi bi-plus-circle display-6"></i>
+            <i class="bi bi-x-circle display-6 d-none"></i>
+            <div class="d-flex justify-content-around w-100">
+              <a class="btn btn-primary plusplus"> + </a>
+              <div><h4>0</h4></div>
+              <a class="btn btn-primary minusminus"> - </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card m-3 position-relative" style="width: 18rem">
+        <div>
+          <img
+            src="https://images.squarespace-cdn.com/content/v1/54ac2acfe4b03d35acdba4f7/1589396871198-RRNKDGZ192II22147R39/1.jpg?"
+            class="card-img-top"
+            alt="Military Gas Mask"
+          />
+          <i
+            class="bi bi-bookmark-heart display-6 position-absolute top-3 end-0"
+          ></i>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Military Gas Mask</h5>
+          <p class="card-text">
+            Sizes Available: One Size Fits All.
+            <br />
+            Material: High-quality protective materials.
+          </p>
+          <p class="card-text">
+            <strong>Price: <span class="price">83.90</span> TND</strong>
+          </p>
+          <div
+            class="d-flex flex-column justify-content-center align-items-center"
+          >
+            <i class="bi bi-plus-circle display-6"></i>
+            <i class="bi bi-x-circle display-6 d-none"></i>
+            <div class="d-flex justify-content-around w-100">
+              <a class="btn btn-primary plusplus"> + </a>
+              <div><h4>0</h4></div>
+              <a class="btn btn-primary minusminus"> - </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card m-3 position-relative" style="width: 18rem">
+        <div>
+          <img
+            src="https://weaponsgalore.com/weapons/wp-content/uploads/2021/05/MU-20-02BK_angle1.jpg"
+            class="card-img-top"
+            alt="Black Full Tang Tactical Knife"
+          />
+          <i
+            class="bi bi-bookmark-heart display-6 position-absolute top-3 end-0"
+          ></i>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Black Full Tang Tactical Knife</h5>
+          <p class="card-text">
+            Features:
+            <br />
+            - Full Tang Construction
+            <br />
+            - Black Stainless Steel Blade
+            <br />
+            - Tactical Handle Design
+          </p>
+          <p class="card-text">
+            <strong>Price: <span class="price">43.90</span> TND</strong>
+          </p>
+          <div
+            class="d-flex flex-column justify-content-center align-items-center"
+          >
+            <i class="bi bi-plus-circle display-6"></i>
+            <i class="bi bi-x-circle display-6 d-none"></i>
+            <div class="d-flex justify-content-around w-100">
+              <a class="btn btn-primary plusplus"> + </a>
+              <div><h4>0</h4></div>
+              <a class="btn btn-primary minusminus"> - </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="bg-dark text-light">
+      <p class="text-center m-0 p-2">&copy; 2023 Your Shopping Cart. All rights reserved.</p>
+    </footer>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./Scripts/Scripts.js"></script>
+  </body>
+</html>
