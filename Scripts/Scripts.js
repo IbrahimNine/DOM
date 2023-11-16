@@ -65,6 +65,7 @@ let counts = Array(plusbtns.length).fill(0);
 let currentTotal = 0;
 const totalQtnDisplay = document.getElementById("cost");
 const items = document.querySelectorAll(".card");
+const deleteBtns = document.querySelectorAll(".bi-trash");
 
 // listener for when we click on the plus button it add quantity and an element to the purchase list
 plusbtns.forEach((plusbtn, i) => {
@@ -130,6 +131,12 @@ minusBtns.forEach((minusBtn, j) => {
       const iconItems = document.querySelectorAll(".cart-dropdown li");
       selectedBagIcon.classList.toggle("text-warning", iconItems.length > 0);
     }
+  });
+});
+
+deleteBtns.forEach((deleteBtn, z) => {
+  deleteBtn.addEventListener("click", function () {
+    items[z].remove();
   });
 });
 

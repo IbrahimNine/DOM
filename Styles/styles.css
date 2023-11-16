@@ -60,6 +60,7 @@ nav #logo {
 #myBtn:hover {
   font-size: large;
 }
-.bi-bookmark-heart:hover {
+.bi-bookmark-heart:hover,
+.bi-trash:hover {
   cursor: pointer;
 }
