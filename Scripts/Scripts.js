@@ -23,8 +23,9 @@ function toggleItemInBag(item) {
     });
   } else {
     let newItem = document.createElement("li");
+    newItem.setAttribute("data-item", item.title);
     newItem.innerHTML = `
-      <div class="dropdown-item">
+      <div class="dropdown-item favItem">
         <img
           class="rounded float-left"
           src="${item.image}"
@@ -138,13 +139,26 @@ deleteBtns.forEach((deleteBtn, z) => {
   deleteBtn.addEventListener("click", function () {
     const cartDropdown = document.querySelector(".cart-dropdown");
     const itemTitle = items[z].querySelector(".card-title").textContent;
-    currentTotal -= price[z].textContent * cardQtn[z].textContent;
-    totalQtnDisplay.textContent = currentTotal.toFixed(2);
-    cartDropdown.querySelector(`[data-item="${itemTitle}"]`).remove();
+    const favList = cartDropdown
+      .closest(".row")
+      .querySelector("#bookmarkDropdown");
+
+    if (cartDropdown.querySelector(`[data-item="${itemTitle}"]`)) {
+      currentTotal -= price[z].textContent * cardQtn[z].textContent;
+      totalQtnDisplay.textContent = currentTotal.toFixed(2);
+      cartDropdown.querySelector(`[data-item="${itemTitle}"]`).remove();
+    }
+    if (favList.querySelector(`[data-item="${itemTitle}"]`)) {
+      favList.querySelector(`[data-item="${itemTitle}"]`).remove();
+    }
     items[z].remove();
     const selectedBagIcon = document.querySelector(".bi-cart-check");
     const iconItems = document.querySelectorAll(".cart-dropdown li");
+    let favoritedItems = document.querySelectorAll(".favItem");
+    let bagHeartIcon = document.querySelector(".bi-bag-heart");
     selectedBagIcon.classList.toggle("text-warning", iconItems.length > 0);
+    bagHeartIcon.classList.toggle("text-warning", favoritedItems.length > 0);
+    console.log(favoritedItems);
   });
 });
 
