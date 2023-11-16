@@ -136,7 +136,15 @@ minusBtns.forEach((minusBtn, j) => {
 
 deleteBtns.forEach((deleteBtn, z) => {
   deleteBtn.addEventListener("click", function () {
+    const cartDropdown = document.querySelector(".cart-dropdown");
+    const itemTitle = items[z].querySelector(".card-title").textContent;
+    currentTotal -= price[z].textContent * cardQtn[z].textContent;
+    totalQtnDisplay.textContent = currentTotal.toFixed(2);
+    cartDropdown.querySelector(`[data-item="${itemTitle}"]`).remove();
     items[z].remove();
+    const selectedBagIcon = document.querySelector(".bi-cart-check");
+    const iconItems = document.querySelectorAll(".cart-dropdown li");
+    selectedBagIcon.classList.toggle("text-warning", iconItems.length > 0);
   });
 });
 
