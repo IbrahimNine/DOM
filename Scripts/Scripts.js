@@ -1,6 +1,6 @@
 /* ------------------- Bookmark Heart Toggle Functionality ------------------- */
 let favIcons = document.getElementsByClassName("bi-bookmark-heart");
-
+// console.log(favIcons);
 // a function to  add/remove a clicked cards to the bookmark(Your favourites item list).
 function toggleItemInBag(item) {
   let bagDropdown = document.getElementById("bookmarkDropdown");
@@ -56,105 +56,82 @@ for (let i = 0; i < favIcons.length; i++) {
   });
 }
 
-/* -------------------- Your Purchases Cart Toggle Functionality -------------------- */
-let cardContainers = document.querySelectorAll(".card");
-
-for (const cardContainer of cardContainers) {
-  let icons = cardContainer.querySelectorAll(".bi-plus-circle, .bi-x-circle");
-  let price = parseFloat(cardContainer.querySelector(".price").textContent);
-  let quantityDisplay = cardContainer.querySelector(".card .card-body h4");
-  let totalCostDisplay = document.querySelector(".totalCost .cost");
-
-  // a function to be called on the event listener for adding items to the dropdownlist of purchases
-  function addToCartDropdown(itemName, itemImage) {
-    let cartDropdown = document.querySelector(".cart-dropdown");
-
-    if (!cartDropdown.querySelector(`[data-item="${itemName}"]`)) {
-      let listItem = document.createElement("li");
-      listItem.setAttribute("data-item", itemName);
-      listItem.innerHTML = `
-        <div class="dropdown-item">
-          <img
-            class="rounded float-left"
-            src="${itemImage}"
-            alt="${itemName}"
-          />
-          <span><b>${itemName} | ${quantityDisplay.textContent} Pc(s)</b></span>
-        </div>
-      `;
-      cartDropdown.appendChild(listItem);
-    }
-  }
-
-  // a removing items function to be called on the event listener on a second click to remove the item
-  function removeFromCartDropdown(itemName) {
-    let cartDropdown = document.querySelector(".cart-dropdown");
-    let itemToRemove = cartDropdown.querySelector(`[data-item="${itemName}"]`);
-
-    if (itemToRemove) {
-      itemToRemove.remove();
-    }
-  }
-
-  // listening through all the icons of the page to know where the functions should be applied
-  for (const icon of icons) {
-    icon.addEventListener("click", function () {
-      for (const oneOfEach of icons) {
-        oneOfEach.classList.toggle("d-none");
-      }
-
-      let quantity = parseInt(quantityDisplay.textContent);
-      let currentTotal = parseFloat(totalCostDisplay.textContent);
-
-      if (icon.classList.contains("bi-plus-circle")) {
-        currentTotal += quantity * price;
-        if (currentTotal > 0) {
-          addToCartDropdown(
-            cardContainer.querySelector(".card-title").textContent,
-            cardContainer.querySelector("img").src
-          );
-        }
-      } else {
-        if (currentTotal > 0) {
-          currentTotal -= quantity * price;
-          removeFromCartDropdown(
-            cardContainer.querySelector(".card-title").textContent
-          );
-        }
-      }
-
-      totalCostDisplay.textContent = currentTotal.toFixed(2);
-
-      let selectedBagIcon = document.querySelector(".bi-cart-check");
-      let iconItems = document.querySelectorAll(".cart-dropdown li");
-
-      // another toggle method to highlight the icon in condition if any item exists
-      selectedBagIcon.classList.toggle("text-warning", iconItems.length > 0);
-    });
-  }
-}
-
 /* ----------------------- Quantity Controls Script ------------------------ */
 const plusbtns = document.querySelectorAll(".card .plusplus");
 const minusBtns = document.querySelectorAll(".card .minusminus");
 const cardQtn = document.querySelectorAll(".card .card-body h4");
+const price = Array.from(document.querySelectorAll(".price"));
 let counts = Array(plusbtns.length).fill(0);
+let currentTotal = 0;
+const totalQtnDisplay = document.getElementById("cost");
+const items = document.querySelectorAll(".card");
 
-for (const [i, plusbtn] of plusbtns.entries()) {
+// listener for when we click on the plus button it add quantity and an element to the purchase list
+plusbtns.forEach((plusbtn, i) => {
   plusbtn.addEventListener("click", function () {
+    // quantity update
     counts[i]++;
     cardQtn[i].textContent = counts[i];
-  });
-}
+    currentTotal += parseInt(price[i].textContent);
+    totalQtnDisplay.textContent = currentTotal.toFixed(2);
 
-for (const [j, minusBtn] of minusBtns.entries()) {
+    const cartDropdown = document.querySelector(".cart-dropdown");
+    const itemImgSrc = items[i].querySelector("img").src;
+    const itemTitle = items[i].querySelector(".card-title").textContent;
+
+    const listItem = cartDropdown.querySelector(`[data-item="${itemTitle}"]`);
+    // purchases bag item update
+    if (!listItem) {
+      const listItem = document.createElement("li");
+      listItem.setAttribute("data-item", itemTitle);
+      listItem.innerHTML = `
+        <div class="dropdown-item">
+          <img class="rounded float-left" src="${itemImgSrc}" alt="${itemTitle}" />
+          <span><b>${itemTitle} | ${cardQtn[i].textContent} Pc(s)</b></span>
+        </div>
+      `;
+      cartDropdown.appendChild(listItem);
+    } else {
+      listItem.querySelector(
+        `span b`
+      ).textContent = `${itemTitle} | ${cardQtn[i].textContent} Pc(s)`;
+    }
+
+    // colour toggle to check if there are items on the purchases list
+    const selectedBagIcon = document.querySelector(".bi-cart-check");
+    const iconItems = document.querySelectorAll(".cart-dropdown li");
+    selectedBagIcon.classList.toggle("text-warning", iconItems.length > 0);
+  });
+});
+
+// listener for when we click minus button it subtract the quentity from the total cost and update the purchases list or removes it if the Card quanity reaches zero
+minusBtns.forEach((minusBtn, j) => {
   minusBtn.addEventListener("click", function () {
     if (counts[j] > 0) {
+      const cartDropdown = document.querySelector(".cart-dropdown");
+      const itemTitle = items[j].querySelector(".card-title").textContent;
+      const listItem = cartDropdown.querySelector(`[data-item="${itemTitle}"]`);
+      // quantity update
       counts[j]--;
       cardQtn[j].textContent = counts[j];
+      currentTotal -= parseInt(price[j].textContent);
+      totalQtnDisplay.textContent = currentTotal.toFixed(2);
+      // purchases bag update (subtract or remove item)
+      if (counts[j] === 0 && listItem) {
+        listItem.remove();
+      } else {
+        listItem.querySelector(
+          `span b`
+        ).textContent = `${itemTitle} | ${cardQtn[j].textContent} Pc(s)`;
+      }
+
+      // colour toggle to check if there are items on the purchases list
+      const selectedBagIcon = document.querySelector(".bi-cart-check");
+      const iconItems = document.querySelectorAll(".cart-dropdown li");
+      selectedBagIcon.classList.toggle("text-warning", iconItems.length > 0);
     }
   });
-}
+});
 
 /* --------------------------back to the top-----------------------*/
 let mybutton = document.getElementById("myBtn");
